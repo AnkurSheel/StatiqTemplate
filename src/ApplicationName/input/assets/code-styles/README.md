@@ -1,0 +1,1 @@
+This styles are used for code highlighting and are downloaded from https://highlightjs.org/download/
