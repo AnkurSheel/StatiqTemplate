@@ -1,0 +1,28 @@
+name: 'Daily Release'
+
+schedules:
+    - cron: '0 1 * * *'
+      displayName: Daily build
+      branches:
+          include:
+              - master
+      always: true
+
+trigger:
+    batch: false
+    branches:
+        exclude:
+            - '*'
+
+pr: none
+
+variables:
+    - template: azure-pipelines.vars.yml
+
+jobs:
+    - template: azure-pipelines.common.yml
+      parameters:
+          deployScriptParams: '--prod'
+          netlifySiteId: $(netlify.siteId)
+          netlifyToken: $(netlify.token)
+          message: 'Daily build'

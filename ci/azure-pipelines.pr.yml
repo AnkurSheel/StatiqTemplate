@@ -1,0 +1,41 @@
+name: 'PR $(System.PullRequest.PullRequestId)'
+
+trigger:
+    branches:
+        exclude:
+            - '*'
+pr:
+    autoCancel: false
+    branches:
+        include:
+            - master
+
+variables:
+    - template: azure-pipelines.vars.yml
+
+jobs:
+    - template: azure-pipelines.common.yml
+      parameters:
+          netlifySiteId: $(netlify.siteId)
+          netlifyToken: $(netlify.token)
+          message: 'PR $(System.PullRequest.PullRequestNumber) $(System.PullRequest.SourceBranch)'
+
+    - job: Comment
+      dependsOn: Build_And_Deploy
+
+      pool:
+          vmImage: 'ubuntu-latest'
+
+      variables:
+          DEPLOY_URL: $[ dependencies.Build_And_Deploy.outputs['deployToNetlify.DEPLOY_URL'] ]
+
+      steps:
+          - checkout: self
+            fetchDepth: 1
+
+          - task: GitHubComment@0
+            displayName: 'Comment Netlify Preview Url'
+            inputs:
+                gitHubConnection: 'AnkurSheel'
+                repositoryName: '$(Build.Repository.Name)'
+                comment: 'Netlify Preview Url: $(DEPLOY_URL)'
