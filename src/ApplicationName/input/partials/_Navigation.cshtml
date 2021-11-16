@@ -1,0 +1,65 @@
+
+@model BaseModel
+
+<!-- https://www.section.io/engineering-education/creating-a-responsive-navigation-bar-using-tailwind-css-and-javascript/ -->
+
+<nav>
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between">
+            <div class="flex space-x-7 items-center">
+                <!-- Website Logo -->
+                <div>
+                    <a href="/" class="flex items-center py-4 px-2 ">
+                        <span class="font-semibold text-gray-500 text-lg hover:text-green-500">
+                            @Model.Context.GetSiteTitle()
+                        </span
+                        >
+                    </a>
+                </div>
+                <ul class="hidden lg:flex items-center space-x-1">
+                    @foreach (var link in Model.Context.GetNavigationLinks())
+                    {
+                        <li class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition-all transform hover:scale-110">
+                            <a href="@link.RelativeUrl">@link.Title</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <ul class="hidden lg:flex items-center space-x-3">
+                <li>
+                    <a role="button" class="" target="_blank" rel="noopener noreferrer" href="/rss.xml" title="RSS">
+                        <img class="h-8 mr-2 border-none" src="/@Constants.ImagesDirectory/rss.svg" alt="RSS">
+                    </a>
+                </li>
+                <li>
+                    <a role="button" class="inline-flex items-center bg-green-400 text-white p-2 rounded-md text-2xl drop-shadow-lg hover:bg-green-800" target="_blank" rel="noopener noreferrer" href="https://www.buymeacoffee.com/ankursheel" title="Did you learn something or find this summary interesting?">
+                        <img class="h-8 mr-2 border-none" src="/@Constants.ImagesDirectory/bmc-logo.svg" alt="Buy Me A Coffee">
+                        <p class="font-cookie">Buy me a book</p>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="lg:hidden flex items-center">
+                <button class="outline-none mobile-menu-button" aria-label="Mobile Menu">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+        <div class="hidden mobile-menu">
+            <ul class="flex flex-col">
+                @foreach (var link in Model.Context.GetNavigationLinks())
+                {
+                    // Don't add the home page to the nav bar
+                    <li class="text-sm px-2 py-4 hover:bg-green-500 transition duration-300">
+                        <a href="@link.RelativeUrl" class="block">@link.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,10 @@
+﻿@model Tags
+
+<div class="flex flex-row flex-wrap gap-1 place-content-center">
+    @foreach (var tag in Model.AllTags)
+    {
+        <div class="flex-initial border-2 border-black p-2 m-2 rounded-xl text">
+            <a role="button" href="@tag.Url" class="badge text-black bg-grey-light no-underline"> @tag.Name (@tag.Posts.Count)</a>
+        </div>
+    }
+</div>

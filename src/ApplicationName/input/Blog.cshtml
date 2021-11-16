@@ -1,0 +1,20 @@
+﻿---
+Title: All Articles
+---
+
+@model Posts
+
+@{
+    var groups = Model.AllPosts.GroupBy(x => x.Document.GetPublishedDate().Year);
+}
+@foreach (var group in groups)
+{
+    var header = $"{group.Key}({group.Count()})";
+    <h2>@header</h2>
+    foreach (var post in group)
+    {
+        <div>
+            <a href="@post.Document.GetPageUrl()" class="mb-4">@post.Document.GetTitle()</a> - @post.Document.GetPublishedDate().ToString("MMMM dd, yyyy")
+        </div>
+    }
+}

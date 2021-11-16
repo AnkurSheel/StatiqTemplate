@@ -1,0 +1,12 @@
+﻿@model BaseModel
+
+<div class="shadow-md mb-10 bg-gray-200 rounded-3xl">
+    <div class="mx-4 flex flex-col my-4 p-8">
+        <a href="@Model.Document.GetPageUrl()" class="text-center prose-2xl mb-4">@Model.Document.GetTitle()</a>
+        <div class="font-semibold text-center">@Model.Document.GetReadingTime().RoundedMinutes min</div>
+        <p>
+            @Model.Document.GetExcerpt()
+        </p>
+            <a href="@Model.Document.GetPageUrl()" class="text-center hover:no-underline mt-2 hover:text-gray-200 hover:bg-purple-600">Read post ›</a>
+    </div>
+</div>

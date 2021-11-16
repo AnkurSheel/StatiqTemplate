@@ -1,0 +1,35 @@
+﻿@model BaseModel
+
+<!DOCTYPE html>
+<html lang="en" class="min-h-screen">
+<head>
+    @await Html.PartialAsync("partials/_Head.cshtml")
+</head>
+<body class="font-sans font-normal leading-relaxed font-base text-gray-800 min-h-screen bg-gray-100">
+@if (Model.Context.GetGoogleTagManagerId() != null)
+{
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=@Model.Context.GetGoogleTagManagerId()"
+                height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+}
+<header class="sticky top-0 bg-white shadow-lg z-10">
+    @await Html.PartialAsync("partials/_Navigation.cshtml")
+</header>
+<main class="mx-auto max-w-prose p-8 prose prose-xl prose-purple">
+    <h1 class="text-center">@Model.Document.GetTitle()</h1>
+    <div class="flex flex-col min-h-screen">
+        <article>
+            @RenderBody()
+        </article>
+    </div>
+</main>
+
+@await Html.PartialAsync("partials/_Scripts.cshtml")
+@await RenderSectionAsync("Scripts", false)
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@model BaseModel
+
+@{
+    Layout = "../_Layout.cshtml";
+}
+<div class="prose-sm italic ">
+    <div class="flex justify-evenly items-center">
+        <i>Last Updated On: @Model.Document.GetPublishedDate().ToString("dd-MMM-yyyy")</i>
+        <i class="font-bold">
+            Reading Time: @Model.Document.GetReadingTime().RoundedMinutes min
+        </i>
+    </div>
+
+    <div class="flex flex-row flex-wrap gap-1 place-content-center">
+        @foreach (var tag in Model.Document.GetTags())
+        {
+            var path = new NormalizedPath($"/tags/{tag}").OptimizeFileName().ToString();
+
+            <div class="flex-initial border-2 border-black p-2 m-2 border rounded-xl">
+                <a role="button" href="@path" class="badge text-black bg-grey-light no-underline">@tag</a>
+            </div>
+        }
+    </div>
+</div>
+
+@RenderBody()
+
+@section Scripts{
+    @* <div class="flex items-center space-x-3 flex-col mt-8 pt-4 border-2"> *@
+    @*     <h2>Did you learn something or find this summary interesting?</h2> *@
+    @*     <a role="button" class="p-2 m-2 inline-flex items-center bg-green-400 text-white rounded-md text-2xl drop-shadow-lg transition duration-500 ease-in-out hover:bg-green-800 transform hover:scale-110 flex-grow" target="_blank" rel="noopener noreferrer" href="https://www.buymeacoffee.com/ankursheel"> *@
+    @*         <img class="h-8 mr-2 border-none" src="/assets/bmc-logo.svg" alt="Buy Me A Coffee"> *@
+    @*         Buy me a book *@
+    @*     </a> *@
+    @* </div> *@
+
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ankursheel" data-description="Support me on Buy me a coffee!" data-message="Did you learn something or find this summary interesting? Buy me a coffee" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+}

@@ -1,0 +1,57 @@
+﻿@model BaseModel
+
+@{
+    var type = Model.Document.GetPageUrl().StartsWith($"/{Constants.BlogPath}/")
+        ? "article"
+        : "website";
+}
+
+<title>@Model.Context.GetSiteTitle() - @Model.Document.GetTitle()</title>
+<meta charset="utf-8"/>
+
+<!-- Google Tag Manager -->
+@if (Model.Context.GetGoogleTagManagerId() != null)
+{
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','@Model.Context.GetGoogleTagManagerId()');</script>
+    <!-- End Google Tag Manager -->
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="@Model.Document.GetExcerpt()"/>
+<link href="/@Constants.AssetsDirectory/styles.css" rel="stylesheet"/>
+<link href="/@Constants.AssetsDirectory/code-styles/obsidian.min.css" rel="stylesheet"/>
+<link rel="canonical" href="@Model.Context.GetCanonicalUrl(Model.Document)"/>
+
+@* Google / Search Engine Tags *@
+<meta itemProp="name" content="@Model.Document.GetTitle()"/>
+<meta itemProp="description" content="@Model.Document.GetExcerpt()"/>
+@if (Model.Document.GetImageFacebook() != null)
+{
+    <meta itemProp="image" content="@Model.Document.GetImageFacebook()"/>
+}
+@* OpenGraph tags *@
+<meta property="og:url" content="@Model.Document.GetPageUrl(false)"/>
+<meta property="og:type" content="@type"/>
+<meta property="og:title" content="@Model.Document.GetTitle()"/>
+<meta property="og:description" content="@Model.Document.GetExcerpt()"/>
+@if (Model.Document.GetImageFacebook() != null)
+{
+    <meta property="og:image" content="@Model.Document.GetImageFacebook()"/>
+    <meta property="og:image:secure_url" content="@Model.Document.GetImageFacebook()"/>
+}
+
+@* Twitter Card tags  *@
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Model.Context.GetTwitterUserName()"/>
+<meta name="twitter:creator" content="@Model.Context.GetTwitterUserName()"/>
+<meta name="twitter:title" content="@Model.Document.GetTitle()"/>
+<meta name="twitter:description" content="@Model.Document.GetExcerpt()"/>
+@if (Model.Document.GetImageTwitter() != null)
+{
+    <meta name="twitter:image" content="@Model.Document.GetImageTwitter()"/>
+    <meta name="twitter:image:secure_url" content="@Model.Document.GetImageTwitter()"/>
+}

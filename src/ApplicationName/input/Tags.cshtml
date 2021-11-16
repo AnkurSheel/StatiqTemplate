@@ -1,0 +1,6 @@
+@model Tag
+
+@foreach (var post in Model.Posts)
+{
+    @await Html.PartialAsync("partials/_Card.cshtml", post)
+}

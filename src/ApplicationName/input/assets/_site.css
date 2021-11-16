@@ -1,0 +1,49 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Inter';
+        src: url(fonts/Inter-VariableFont.ttf);
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Cookie';
+        src: url(fonts/Cookie-Regular.ttf);
+        font-display: swap;
+    }
+
+    article img {
+        @apply rounded border-4 border-gray-600 border-double;
+    }
+
+    a {
+        @apply transition-all transform hover:scale-110;
+    }
+
+    p {
+        @apply slashed-zero diagonal-fractions;
+    }
+
+    blockquote {
+        @apply relative p-2 italic border-l-4 text-2xl bg-green-100 border-pink-500 bg-opacity-25 shadow-lg;
+    }
+
+    blockquote > p {
+        @apply text-blue-500 mx-10;
+    }
+
+    blockquote > p:first-of-type:before {
+        @apply text-yellow-500;
+    }
+
+    blockquote > p:first-of-type:after {
+        @apply text-yellow-500;
+    }
+
+    blockquote cite {
+        @apply flex justify-end text-purple-500;
+    }
+}

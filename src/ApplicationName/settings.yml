@@ -1,0 +1,16 @@
+Title: 'Title'
+Description: 'Description'
+Host: 'url'
+LinksUseHttps: true
+TwitterUsername: 'twitter'
+ReadingTimeWordsPerMinute: 238
+HeaderLinks:
+    - Title: 'About'
+      Url: '/about'
+    - Title: 'All Posts'
+      Url: '/blog'
+    - Title: 'All Tags'
+      Url: '/tags'
+    - Title: 'Contact'
+      Url: '/contact'
+GoogleTagManagerId: gtm id
